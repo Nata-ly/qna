@@ -5,6 +5,6 @@ FactoryBot.define do
 
     trait :invalid do
      title { nil }
-   end
+    end
   end
 end
