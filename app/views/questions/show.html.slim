@@ -1,2 +1,10 @@
 h1 = question.title
 p = question.body
+
+p = 'Answer the question:'
+= render 'shared/errors', resource: @answer
+= render 'answers/form', question: question
+
+p = 'Answers:'
+- question.answers.each do |answer|
+  p = answer.body
