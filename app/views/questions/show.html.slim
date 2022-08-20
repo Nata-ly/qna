@@ -5,8 +5,9 @@ p = question.body
 
 
 p = 'Answer the question:'
-= render 'shared/errors', resource: @answer
+.answer-errors
+  = render 'shared/errors', resource: @answer
 = render 'answers/form', question: question
-
-p = 'Answers:'
-= render question.answers
+.answers
+  p = 'Answers:'
+  = render question.answers

@@ -25,11 +25,11 @@ feature 'User can delete their answer to the question', %q{
     end
 
     scenario "does not see a link to delete another user's answer" do
-      expect(page).to have_no_link('Delete answer', href: question_answer_path(question, another_answer))
+      expect(page).to have_no_link('Delete answer', href: answer_path(another_answer))
     end
   end
   scenario 'Unauthenticated user deletes answer' do
     visit question_path(question)
-    expect(page).to have_no_link('Delete answer', href: question_answer_path(question, answer))
+    expect(page).to have_no_link('Delete answer', href: answer_path(answer))
   end
 end
