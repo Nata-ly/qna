@@ -29,6 +29,10 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    question.update(question_params)
+  end
+
   private
 
   def question
