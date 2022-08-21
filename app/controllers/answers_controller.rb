@@ -13,6 +13,10 @@ class AnswersController < ApplicationController
     end
   end
 
+  def update
+    answer.update(answer_params)
+  end
+
   private
 
   def question

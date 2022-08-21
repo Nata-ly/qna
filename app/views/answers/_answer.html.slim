@@ -1,3 +1,13 @@
-p = answer.body
-- if current_user == answer.user
-  p = link_to 'Delete answer', [answer.question, answer], method: :delete
+- if answer.persisted?
+  div id = "answer-#{answer.id}"
+    p = answer.body
+    - if user_with_rights?(answer.user)
+      p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+      div class = "answer-errors-#{answer.id}"
+        = render 'shared/errors', resource: answer
+      = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+        = f.label :body, 'Your answer'
+        = f.text_area :body
+        = f.submit 'Save'
+
+      p = link_to 'Delete answer', answer, method: :delete
