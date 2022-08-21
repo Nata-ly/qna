@@ -17,10 +17,9 @@ feature 'User can delete their answer to the question', %q{
       visit question_path(question)
     end
 
-    scenario 'deletes their answer' do
+    scenario 'deletes their answer', js: true do
       click_on 'Delete answer'
 
-      expect(page).to have_content 'Your answer successfully destroy.'
       expect(page).to have_no_content answer.body
     end
 

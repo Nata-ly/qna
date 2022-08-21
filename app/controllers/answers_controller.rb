@@ -8,8 +8,8 @@ class AnswersController < ApplicationController
   def destroy
     if current_user == answer.user
       answer.destroy
-
-      redirect_to answer.question, notice: 'Your answer successfully destroy.'
+    else
+      redirect_to answer.question
     end
   end
 
