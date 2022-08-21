@@ -5,6 +5,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @best_answer = question.best_answer
+    @other_answers = question.answers.where.not(id: question.best_answer_id)
   end
 
   def new

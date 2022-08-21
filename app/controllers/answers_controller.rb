@@ -17,6 +17,11 @@ class AnswersController < ApplicationController
     answer.update(answer_params)
   end
 
+  def mark_as_best
+    @last_best_answers = answer.question.best_answer
+    answer.question.update(best_answer_id: answer.id)
+  end
+
   private
 
   def question

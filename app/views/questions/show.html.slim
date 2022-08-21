@@ -22,5 +22,10 @@ p = 'Answer the question:'
   = render 'shared/errors', resource: @answer
 = render 'answers/form', question: question
 .answers
-  p = 'Answers:'
-  = render question.answers
+  .best_answer
+    - if question.best_answer
+      p = 'Best answer:'
+      = render @best_answer
+  .other_answer
+    p = 'Answers:'
+    = render @other_answers
