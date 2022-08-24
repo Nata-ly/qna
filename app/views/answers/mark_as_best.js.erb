@@ -1,5 +1,5 @@
+$('.other_answer #answer-' + <%= @answer.id %>).remove();
 <% if @last_best_answers %>
   $('.other_answer').append('<%= j render @last_best_answers %>');
 <% end %>
-$('.other_answer #answer-' + <%= @answer.id %>).remove();
 $('.best_answer').html("<p>Best answer:</p><%= j render @answer %>");
