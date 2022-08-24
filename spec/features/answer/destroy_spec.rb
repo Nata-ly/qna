@@ -17,19 +17,18 @@ feature 'User can delete their answer to the question', %q{
       visit question_path(question)
     end
 
-    scenario 'deletes their answer' do
+    scenario 'deletes their answer', js: true do
       click_on 'Delete answer'
 
-      expect(page).to have_content 'Your answer successfully destroy.'
       expect(page).to have_no_content answer.body
     end
 
     scenario "does not see a link to delete another user's answer" do
-      expect(page).to have_no_link('Delete answer', href: question_answer_path(question, another_answer))
+      expect(page).to have_no_link('Delete answer', href: answer_path(another_answer))
     end
   end
   scenario 'Unauthenticated user deletes answer' do
     visit question_path(question)
-    expect(page).to have_no_link('Delete answer', href: question_answer_path(question, answer))
+    expect(page).to have_no_link('Delete answer', href: answer_path(answer))
   end
 end

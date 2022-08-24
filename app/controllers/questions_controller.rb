@@ -5,6 +5,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @best_answer = question.best_answer
+    @other_answers = question.answers.where.not(id: question.best_answer_id)
   end
 
   def new
@@ -27,6 +29,10 @@ class QuestionsController < ApplicationController
 
       redirect_to questions_path, notice: 'Your question successfully destroy.'
     end
+  end
+
+  def update
+    question.update(question_params)
   end
 
   private

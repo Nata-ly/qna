@@ -6,4 +6,8 @@ module ApplicationHelper
       link_to('Sign in', user_session_path)
     end
   end
+
+  def user_with_rights?(user)
+    user_signed_in? && current_user == user
+  end
 end

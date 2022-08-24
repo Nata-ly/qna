@@ -1,12 +1,31 @@
-h1 = question.title
-p = question.body
-- if current_user == question.user
+.question
+  h1 = question.title
+  p = question.body
+- if user_with_rights?(question.user)
+  p = link_to 'Edit question', '#', class: 'edit-question-link'
+  div class = "question-errors"
+    = render 'shared/errors', resource: question
+  = form_with model: question, class: 'hidden', local: false, html: { id: "edit-question" } do |f|
+    p
+      = f.label :body, 'Your title'
+      = f.text_field :title
+    p
+      = f.label :body, 'Your question'
+      = f.text_area :body
+    p = f.submit 'Save'
+
   p = link_to 'Delete question', question_path(question), method: :delete
 
 
 p = 'Answer the question:'
-= render 'shared/errors', resource: @answer
+.answer-errors
+  = render 'shared/errors', resource: @answer
 = render 'answers/form', question: question
-
-p = 'Answers:'
-= render question.answers
+.answers
+  .best_answer
+    - if question.best_answer
+      p = 'Best answer:'
+      = render @best_answer
+  .other_answer
+    p = 'Answers:'
+    = render @other_answers
