@@ -22,6 +22,13 @@ class AnswersController < ApplicationController
     answer.question.update(best_answer_id: answer.id)
   end
 
+  def destroy_file
+    if current_user == answer.user
+      @file = ActiveStorage::Attachment.find(params[:file_id])
+      @file.purge
+    end
+  end
+
   private
 
   def question

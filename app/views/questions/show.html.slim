@@ -2,7 +2,7 @@
   h1 = question.title
   p = question.body
   - if question.files.attached?
-    = render partial: 'file', collection: question.files
+    = render partial: 'file', collection: question.files, question: question
 
 - if user_with_rights?(question.user)
   p = link_to 'Edit question', '#', class: 'edit-question-link'
