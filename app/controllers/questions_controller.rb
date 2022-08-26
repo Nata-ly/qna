@@ -35,15 +35,22 @@ class QuestionsController < ApplicationController
     question.update(question_params)
   end
 
+  def destroy_file
+    if current_user == question.user
+      @file = ActiveStorage::Attachment.find(params[:file_id])
+      @file.purge
+    end
+  end
+
   private
 
   def question
-    @question ||= Question.find(params[:id])
+    @question ||= Question.with_attached_files.find(params[:id])
   end
 
   helper_method :question
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, files: [])
   end
 end

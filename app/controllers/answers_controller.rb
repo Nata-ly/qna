@@ -22,6 +22,13 @@ class AnswersController < ApplicationController
     answer.question.update(best_answer_id: answer.id)
   end
 
+  def destroy_file
+    if current_user == answer.user
+      @file = ActiveStorage::Attachment.find(params[:file_id])
+      @file.purge
+    end
+  end
+
   private
 
   def question
@@ -35,6 +42,6 @@ class AnswersController < ApplicationController
   helper_method :question
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, files: [])
   end
 end

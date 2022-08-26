@@ -1,6 +1,9 @@
 .question
   h1 = question.title
   p = question.body
+  - if question.files.attached?
+    = render partial: 'file', collection: question.files, question: question
+
 - if user_with_rights?(question.user)
   p = link_to 'Edit question', '#', class: 'edit-question-link'
   div class = "question-errors"
@@ -12,6 +15,9 @@
     p
       = f.label :body, 'Your question'
       = f.text_area :body
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true, direct_upload: true
     p = f.submit 'Save'
 
   p = link_to 'Delete question', question_path(question), method: :delete
