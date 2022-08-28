@@ -10,4 +10,8 @@ module ApplicationHelper
   def user_with_rights?(user)
     user_signed_in? && current_user == user
   end
+
+  def gist_id(url)
+    url.split('/').last
+  end
 end

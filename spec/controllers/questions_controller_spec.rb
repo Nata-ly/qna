@@ -10,6 +10,10 @@ RSpec.describe QuestionsController, type: :controller do
     it 'renders show view' do
       expect(response).to render_template :show
     end
+
+    it 'assigns new link for answer' do
+      expect(assigns(:answer).links.first).to be_a_new(Link)
+    end
   end
 
   describe 'GET #new' do
@@ -18,6 +22,14 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'renders new view' do
       expect(response).to render_template :new
+    end
+
+    it 'assigns a new Link to @question.link' do
+      expect(assigns(:question)).to be_a_new(Question)
+    end
+
+    it '' do
+      expect(assigns(:question).links.first).to be_a_new(Link)
     end
   end
 
@@ -99,4 +111,23 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to render_template :destroy_file
     end
   end
+
+  describe 'DELETE #destroy_link' do
+    before do
+      question.links.create(name: 'test', url: 'http://google.com')
+    end
+    before { login(user) }
+
+    it 'delete question link' do
+      expect do
+        delete :destroy_link, params: { id: question, link: question.links.first.id }, format: :js
+      end.to change(question.links, :count).by(-1)
+    end
+
+    it 'render destroy link view' do
+      delete :destroy_link, params: { id: question, link: question.links.first.id }, format: :js
+      expect(response).to render_template :destroy_link
+    end
+  end
+
 end

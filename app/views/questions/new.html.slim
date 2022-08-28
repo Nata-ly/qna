@@ -1,6 +1,6 @@
 = render 'shared/errors', resource: @question
 
-= form_with model: @question do |f|
+= form_with model: @question, class: 'link-update' do |f|
   = f.label :title
   = f.text_field :title
 
@@ -11,4 +11,11 @@
     = f.label :files
     = f.file_field :files, multiple: true, direct_upload: true
 
+  h3 Links:
+  #cards
+    = f.fields_for :links do |link|
+      .field
+        = render 'shared/link_fields', f: link
+    .links
+      = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
   = f.submit 'Ask'

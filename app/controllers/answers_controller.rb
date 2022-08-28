@@ -29,6 +29,13 @@ class AnswersController < ApplicationController
     end
   end
 
+  def destroy_link
+    if current_user == answer.user
+      @link = Link.find(params[:link])
+      @link.destroy
+    end
+  end
+
   private
 
   def question
@@ -42,6 +49,6 @@ class AnswersController < ApplicationController
   helper_method :question
 
   def answer_params
-    params.require(:answer).permit(:body, files: [])
+    params.require(:answer).permit(:body, files: [], links_attributes: [:id, :name, :url, :_destroy])
   end
 end

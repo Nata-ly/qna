@@ -5,12 +5,15 @@
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
-require('jquery')
+import 'jquery'
 import "channels"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "./answers"
 import "./questions"
+import "./gist"
+import '@nathanvda/cocoon'
+
 
 Rails.start()
 Turbolinks.start()
