@@ -36,7 +36,10 @@
     p = f.submit 'Save'
 
   p = link_to 'Delete question', question_path(question), method: :delete
-
+  - if question.reward
+    p
+      = 'Reward:'
+      = question.reward.title
 
 p = 'Answer the question:'
 .answer-errors
