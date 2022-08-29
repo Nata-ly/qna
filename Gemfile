@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
+gem 'cocoon'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

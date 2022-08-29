@@ -8,17 +8,38 @@
           p = link_to file.filename.to_s, url_for(file)
           - if user_with_rights?(answer.user)
             p = link_to 'Delete file', destroy_file_answer_path(answer, file_id: file.id), method: :delete, remote: true
+    - unless answer.links.count.zero?
+      .links
+        p Links:
+        ul
+          - answer.links.each do |link|
+            li id = "answer-link-#{link.id}"
+              = link_to link.name, link.url
+              - if link.gist?
+                .link-gist data-gist-id = "#{gist_id(link.url)}"
+                  = javascript_include_tag link.url+".js"
+              - if user_with_rights?(answer.user)
+                p = link_to 'Delete link', destroy_link_answer_path(answer, link: link), method: :delete, remote: true
 
     - if user_with_rights?(answer.user)
       p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
       div class = "answer-errors-#{answer.id}"
         = render 'shared/errors', resource: answer
-      = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+      = form_with model: answer, local: false, class: 'hidden link-update', id: "edit-answer-#{answer.id}" do |f|
         = f.label :body, 'Your answer'
         = f.text_area :body
         p
           = f.label :files
           = f.file_field :files, multiple: true, direct_upload: true
+
+        h3 = 'Links:'
+        #cards
+          = f.fields_for :links do |link|
+            .field
+              = render 'shared/link_fields', f: link
+          .links
+            = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+
         = f.submit 'Save'
 
       p = link_to 'Delete answer', answer, method: :delete, remote: true

@@ -98,4 +98,25 @@ RSpec.describe AnswersController, type: :controller do
       expect(response).to render_template :destroy_file
     end
   end
+
+
+  describe 'DELETE #destroy_link' do
+    let(:user) { create(:user) }
+    let!(:answer) { create(:answer, question: question, user: user) }
+    before do
+      answer.links.create(name: 'test', url: 'http://google.com')
+    end
+    before { login(user) }
+
+    it 'delete answer link' do
+      expect do
+        delete :destroy_link, params: { id: answer, link: answer.links.first.id }, format: :js
+      end.to change(answer.links, :count).by(-1)
+    end
+
+    it 'render destroy link view' do
+      delete :destroy_link, params: { id: answer, link: answer.links.first.id }, format: :js
+      expect(response).to render_template :destroy_link
+    end
+  end
 end
