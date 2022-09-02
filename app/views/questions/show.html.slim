@@ -41,6 +41,13 @@
       = 'Reward:'
       = question.reward.title
 
+.votes
+  .votes-errors
+  = link_to 'Negative', vote_negative_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
+  .value = question.vote_value
+  = link_to 'Positive', vote_positive_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
+  = link_to 'Cancel_voice', cancel_voice_question_path(question), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
+
 p = 'Answer the question:'
 .answer-errors
   = render 'shared/errors', resource: @answer

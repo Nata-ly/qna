@@ -12,6 +12,7 @@ import "channels"
 import "./answers"
 import "./questions"
 import "./gist"
+import "./votes"
 import '@nathanvda/cocoon'
 
 
