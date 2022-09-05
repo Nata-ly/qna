@@ -1,9 +1,6 @@
 import consumer from "./consumer"
 
 $(document).on('turbolinks:load', function() {
-  if (this.subscription) {
-    consumer.subscriptions.remove(this.subscription)
-  }
 
   if (document.querySelector('#questions-list')){
     var subscription = consumer.subscriptions.create("QuestionsChannel", {

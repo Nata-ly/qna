@@ -4,6 +4,9 @@ class AnswersController < ApplicationController
 
   def create
     @answer = question.answers.create(answer_params.merge(user: current_user))
+    unless @answer.errors.any?
+      SendAnswerJob.perform_later(@answer)
+    end
   end
 
   def destroy

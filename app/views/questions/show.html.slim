@@ -1,4 +1,6 @@
 .question
+  #user-id data-user-id="#{current_user&.id}"
+  #question-id data-question-id="#{question.id}"
   h1 = question.title
   p = question.body
   - if question.files.attached?
