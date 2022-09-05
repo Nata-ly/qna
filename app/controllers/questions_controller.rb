@@ -23,6 +23,8 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
 
     if @question.save
+      ActionCable.server.broadcast 'questions_channel',
+                                   @question
       redirect_to @question, notice: 'Your question successfully created.'
     else
       render :new
