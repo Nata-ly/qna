@@ -1,0 +1,7 @@
+div class = "comment-errors"
+
+= form_with model: [resource, resource.comments.new], class: 'hidden comment-form', local: false do |f|
+  p
+    = f.label :body, 'Your body'
+    = f.text_area :body
+  p = f.submit 'Save'

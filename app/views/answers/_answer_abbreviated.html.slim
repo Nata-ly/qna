@@ -27,3 +27,9 @@
       .value = answer.vote_value
       = link_to 'Positive', vote_positive_answer_path(answer), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
       = link_to 'Cancel_voice', cancel_voice_answer_path(answer), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
+
+    div class="comment_answer_#{answer.id}"
+      .comments
+        = render answer.comments
+      p = link_to 'Add a comment', '#', class: 'add-comment'
+      p = render 'comments/form', resource: answer
