@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
     const question_element = document.getElementById('question-id')
     const question_id = question_element.getAttribute('data-question-id')
 
-    var subscription = consumer.subscriptions.create( { channel: "AnswersChannel", room: question_id }, {
+    var subscription = consumer.subscriptions.create( { channel: "AnswersChannel", question: question_id }, {
       connected() {
       },
 
