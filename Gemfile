@@ -25,6 +25,9 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
 gem 'cocoon'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
