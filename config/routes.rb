@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       delete :destroy_file
       delete :destroy_link
     end
+    resources :comments, shallow: true, only: %i[create]
     concerns :votable
     resources :answers, shallow: true, only: %i[show create update destroy] do
       member do
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
         delete :destroy_file
         delete :destroy_link
       end
+      resources :comments, shallow: true, only: %i[create]
       concerns :votable
     end
   end

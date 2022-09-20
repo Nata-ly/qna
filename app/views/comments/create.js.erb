@@ -1,0 +1,10 @@
+let parentClass = $('.comment_<%= @resource.class.to_s.downcase %>_<%= @resource.id %>')
+<% if @comment.errors.present? %>
+  $(parentClass).find('.comment-errors').html('<%= j render "shared/errors", resource: @comment %>')
+<% else %>
+  $(parentClass).find('.comments').append('<%= j render @comment %>');
+  $(parentClass).find('#comment_body').val('');
+  $(parentClass).find('.comment-errors').html('');
+  $(parentClass).find('.add-comment').show()
+  $(parentClass).find('.comment-form').addClass('hidden')
+<% end %>
