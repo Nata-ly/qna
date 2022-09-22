@@ -16,9 +16,9 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
     if @user&.persisted?
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: provider) if is_navigational_format?
-    elsif current_request.info[:email].nil? && @user.nil?
-      session[:auth_provider] = current_request.provider
-      session[:auth_uid] = current_request.uid.to_s
+    elsif current_request && current_request[:provider] && current_request[:uid]
+      session[:auth_provider] = current_request[:provider]
+      session[:auth_uid] = current_request[:uid]&.to_s
       render 'user/finish_signup'
     else
       redirect_to root_path, alert: 'Something went wrong'
