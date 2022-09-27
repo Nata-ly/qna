@@ -8,13 +8,13 @@ feature 'User can sign up', %q{
 
   background { visit new_user_registration_path }
 
-  scenario 'Unregistered user tries to sign up' do
+  scenario 'Unregistered user tries to sign up', js: true do
     fill_in 'Email', with: 'Email@test.com'
     fill_in 'Password', with: 'Password'
     fill_in 'Password confirmation', with: 'Password'
-    click_on 'Sign up'
 
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    click_on 'Sign up'
+    expect(page).to have_content 'A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.'
   end
   scenario 'Unregistered user tries to sign up with errors' do
     click_on 'Sign up'
