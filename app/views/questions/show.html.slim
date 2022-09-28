@@ -12,7 +12,7 @@
       ul
         = render partial: 'link', collection: question.links, question: question
 
-- if user_with_rights?(question.user)
+- if can?(:edit, question)
   p = link_to 'Edit question', '#', class: 'edit-question-link'
   div class = "question-errors"
     = render 'shared/errors', resource: question

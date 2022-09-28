@@ -92,12 +92,12 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'delete answer file' do
       expect do
-        delete :destroy_file, params: { id: answer, file_id: answer.files.first.id }, format: :js
+        delete :destroy_file, params: { id: answer, file_id: answer.files.first.id, user: user }, format: :js
       end.to change(answer.files, :count).by(-1)
     end
 
     it 'render destroy_file view' do
-      delete :destroy_file, params: { id: answer, file_id: answer.files.first.id }, format: :js
+      delete :destroy_file, params: { id: answer, file_id: answer.files.first.id, user: user }, format: :js
       expect(response).to render_template :destroy_file
     end
   end
@@ -113,12 +113,12 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'delete answer link' do
       expect do
-        delete :destroy_link, params: { id: answer, link: answer.links.first.id }, format: :js
+        delete :destroy_link, params: { id: answer, link: answer.links.first.id, user: user }, format: :js
       end.to change(answer.links, :count).by(-1)
     end
 
     it 'render destroy link view' do
-      delete :destroy_link, params: { id: answer, link: answer.links.first.id }, format: :js
+      delete :destroy_link, params: { id: answer, link: answer.links.first.id, user: user }, format: :js
       expect(response).to render_template :destroy_link
     end
   end

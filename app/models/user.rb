@@ -19,4 +19,8 @@ class User < ApplicationRecord
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid)
   end
+
+  def author_of?(resource)
+    resource.user_id == id
+  end
 end
