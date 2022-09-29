@@ -6,7 +6,7 @@
       - answer.files.each do |file|
         div id = "answer-file-#{file.id}"
           p = link_to file.filename.to_s, url_for(file)
-          - if user_with_rights?(answer.user)
+          - if can?(:destroy_file, answer)
             p = link_to 'Delete file', destroy_file_answer_path(answer, file_id: file.id), method: :delete, remote: true
     - unless answer.links.count.zero?
       .links
@@ -18,7 +18,7 @@
               - if link.gist?
                 .link-gist data-gist-id = "#{gist_id(link.url)}"
                   = javascript_include_tag link.url+".js"
-              - if user_with_rights?(answer.user)
+              - if can?(:destroy_link, answer)
                 p = link_to 'Delete link', destroy_link_answer_path(answer, link: link), method: :delete, remote: true
 
     .votes

@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :link do
     name { "MyString" }
-    url { "MyString" }
+    url { "http://MyString.com" }
+    association :linkable
   end
 end

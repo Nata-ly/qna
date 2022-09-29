@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   include Voted
 
+  authorize_resource
+
   def index
     @questions = Question.all
   end
@@ -44,17 +46,13 @@ class QuestionsController < ApplicationController
   end
 
   def destroy_file
-    if current_user == question.user
-      @file = ActiveStorage::Attachment.find(params[:file_id])
-      @file.purge
-    end
+    @file = ActiveStorage::Attachment.find(params[:file_id])
+    @file.purge
   end
 
   def destroy_link
-    if current_user == question.user
-      @link = Link.find(params[:link])
-      @link.destroy
-    end
+    @link = Link.find(params[:link])
+    @link.destroy
   end
 
   private

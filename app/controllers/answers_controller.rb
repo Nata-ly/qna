@@ -2,17 +2,15 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   include Voted
 
+  authorize_resource
+
   def create
     @answer = question.answers.create(answer_params.merge(user: current_user))
     SendAnswerJob.perform_later(@answer) if @answer.errors.empty?
   end
 
   def destroy
-    if current_user == answer.user
-      answer.destroy
-    else
-      redirect_to answer.question
-    end
+    answer.destroy
   end
 
   def update
@@ -28,17 +26,13 @@ class AnswersController < ApplicationController
   end
 
   def destroy_file
-    if current_user == answer.user
-      @file = ActiveStorage::Attachment.find(params[:file_id])
-      @file.purge
-    end
+    @file = ActiveStorage::Attachment.find(params[:file_id])
+    @file.purge
   end
 
   def destroy_link
-    if current_user == answer.user
-      @link = Link.find(params[:link])
-      @link.destroy
-    end
+    @link = Link.find(params[:link])
+    @link.destroy
   end
 
   private

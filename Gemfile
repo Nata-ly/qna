@@ -29,6 +29,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-vkontakte'
 gem 'omniauth-rails_csrf_protection'
+gem 'cancancan', '>= 3.4'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

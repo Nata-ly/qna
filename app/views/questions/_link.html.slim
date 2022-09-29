@@ -3,5 +3,5 @@ li id = "question-link-#{link.id}"
     = link_to link.name, link.url
     .link-gist data-gist-id = "#{gist_id(link.url)}"
       = javascript_include_tag link.url+".js"
-  - if user_with_rights?(question.user)
+  - if can?(:destroy_link, question)
     p = link_to 'Delete link', destroy_link_question_path(question, link: link), method: :delete, remote: true

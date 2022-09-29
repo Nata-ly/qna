@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  authorize_resource
+
   def create
     @comment = resource.comments.create(comment_params.merge(user: current_user))
     unless @comment.errors.any?

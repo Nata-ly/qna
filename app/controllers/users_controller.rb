@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  authorize_resource
+
   def finish_signup
     email = user_params[:email]
 
