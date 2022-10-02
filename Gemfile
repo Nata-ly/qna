@@ -31,6 +31,8 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-rails_csrf_protection'
 gem 'cancancan', '>= 3.4'
 gem 'doorkeeper'
+gem 'active_model_serializers', '~> 0.10'
+gem 'oj'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
