@@ -19,3 +19,9 @@ shared_examples_for 'Returns public fields' do
     end
   end
 end
+
+shared_examples_for 'Returns list' do
+  it 'returns list of files' do
+    expect(resource_response.size).to eq resource.size
+  end
+end
