@@ -1,7 +1,10 @@
 FactoryBot.define do
+  sequence :url do |n|
+    "http://MyString-#{n}.com"
+  end
+
   factory :link do
     name { "MyString" }
-    url { "http://MyString.com" }
-    association :linkable
+    url
   end
 end

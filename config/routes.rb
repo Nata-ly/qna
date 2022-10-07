@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   root to: 'questions#index'
   post '/users/finish_signup' => 'users#finish_signup'
@@ -30,4 +31,17 @@ Rails.application.routes.draw do
       concerns :votable
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [:index] do
+        get :me, on: :collection
+      end
+
+      resources :questions, only: %i[index show update create destroy] do
+        resources :answers, shallow: true, only: %i[index show update create destroy]
+      end
+    end
+  end
+
 end
