@@ -175,6 +175,8 @@ GEM
     msgpack (1.5.4)
     msgpack (1.5.4-java)
     multi_xml (0.6.0)
+    mustermann (2.0.2)
+      ruby2_keywords (~> 0.0.1)
     nio4r (2.5.8)
     nio4r (2.5.8-java)
     nokogiri (1.13.8)
@@ -312,6 +314,11 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    sinatra (2.2.2)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.2)
+      tilt (~> 2.0)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -408,6 +415,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 5.0)
   sidekiq
+  sinatra
   slim-rails
   spring
   turbolinks (~> 5)

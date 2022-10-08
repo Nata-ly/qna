@@ -179,8 +179,8 @@ describe 'Questions API', type: :request do
                                         access_token: access_token.token }
       end
 
-      it 'returns status 302' do
-        expect(response.status).to eq 302
+      it 'returns status 401' do
+        expect(response.status).to eq 401
       end
 
       it 'can not change question attributes' do
@@ -299,8 +299,8 @@ describe 'Questions API', type: :request do
                                         access_token: access_token.token }
       end
 
-      it 'returns status 302' do
-        expect(response.status).to eq 302
+      it 'returns status 401' do
+        expect(response.status).to eq 401
       end
 
       it 'can not change question attributes' do
