@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       resources :comments, shallow: true, only: %i[create]
       concerns :votable
     end
+    resources :subscriptions, shallow: true, only: %i[create destroy]
   end
 
   namespace :api do

@@ -11,6 +11,11 @@ class User < ApplicationRecord
   has_many :questions
   has_one  :reward
   has_many :votes, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+
+  def have_subscription?(question)
+    question.subscriptions.where(user: self).exists?
+  end
 
   def self.find_for_oauth(auth)
     FindForOauthService.new(auth).call

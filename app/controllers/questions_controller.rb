@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
     @other_answers = question.answers.where.not(id: question.best_answer_id)
     @answer = Answer.new
     @answer.links.new
+    @subscription = question.subscriptions.find_by(user: current_user)
   end
 
   def new
@@ -43,6 +44,7 @@ class QuestionsController < ApplicationController
 
   def update
     question.update(question_params)
+    @subscription = question.subscriptions.find_by(user: current_user)
   end
 
   def destroy_file
