@@ -33,6 +33,8 @@ gem 'cancancan', '>= 3.4'
 gem 'doorkeeper'
 gem 'active_model_serializers', '~> 0.10'
 gem 'oj'
+gem 'sidekiq'
+gem 'sinatra', require: false
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

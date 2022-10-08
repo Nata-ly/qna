@@ -50,6 +50,9 @@
   = link_to 'Positive', vote_positive_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
   = link_to 'Cancel_voice', cancel_voice_question_path(question), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
 
+.subscription
+  = render 'subscriptions/subscription', question: question
+
 div class="comment_question_#{question.id}"
   .comments
     = render question.comments

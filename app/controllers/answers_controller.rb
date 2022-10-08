@@ -7,6 +7,7 @@ class AnswersController < ApplicationController
   def create
     @answer = question.answers.create(answer_params.merge(user: current_user))
     SendAnswerJob.perform_later(@answer) if @answer.errors.empty?
+    NewAnswerNotificationJob.perform_later(@answer) if @answer.errors.empty?
   end
 
   def destroy
