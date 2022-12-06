@@ -36,6 +36,12 @@ gem 'oj'
 gem 'sidekiq'
 gem 'sinatra', require: false
 
+gem 'mysql2', '~> 0.5.4'
+gem 'thinking-sphinx', '~> 5.4'
+gem "net-http"
+
+gem 'pry', '~> 0.13.1'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

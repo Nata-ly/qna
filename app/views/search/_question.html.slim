@@ -1,0 +1,9 @@
+p
+  = 'Вопрос: '
+  = link_to question.title, question_path(question)
+p
+  = 'Текст: '
+  = question.body
+p
+  = 'Автор: '
+  = question&.user&.email
