@@ -1,2 +1,8 @@
-p = authenticated_message(current_user)
-p = render 'search/form'
+.header
+  .row
+    .col-2.row-center
+      .title = link_to "MySite", root_path
+    .col-6.row-center
+      p = render 'search/form'
+    .col-3.offset-1.row-center
+      p = authenticated_message(current_user)

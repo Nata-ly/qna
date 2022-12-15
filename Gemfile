@@ -39,7 +39,7 @@ gem 'sinatra', require: false
 gem 'mysql2', '~> 0.5.4'
 gem 'thinking-sphinx', '~> 5.4'
 gem "net-http"
-
+gem 'bootstrap', '~> 5.1'
 gem 'pry', '~> 0.13.1'
 
 # Use Active Storage variant

@@ -1,7 +1,6 @@
 = form_with model: [question, @answer], local: false, id: "add-answer", class: "link-update" do |f|
 
-  p = f.label :body
-  p = f.text_area :body
+  p = f.text_area :body, placeholder: 'Body'
 
   p
     = f.label :files
@@ -13,7 +12,7 @@
       .field
         = render 'shared/link_fields', f: link
     .links
-      = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+      .btn.btn-primary = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
 
 
-  p = f.submit 'Reply'
+  p = f.submit 'Reply', class: 'btn btn-primary'

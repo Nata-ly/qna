@@ -1,73 +1,72 @@
-.question
-  #user-id data-user-id="#{current_user&.id}"
-  #question-id data-question-id="#{question.id}"
-  h1 = question.title
-  p = question.body
-  - if question.files.attached?
-    = render partial: 'file', collection: question.files, question: question
+.container
+  .question
+    #user-id data-user-id="#{current_user&.id}"
+    #question-id data-question-id="#{question.id}"
+    h1 = question.title
+    p = question.body
+    - if question.files.attached?
+      = render partial: 'file', collection: question.files, question: question
 
-  - if question.links
-    .links
-      p Links:
-      ul
-        = render partial: 'link', collection: question.links, question: question
-
-- if can?(:edit, question)
-  p = link_to 'Edit question', '#', class: 'edit-question-link'
-  div class = "question-errors"
-    = render 'shared/errors', resource: question
-  = form_with model: question, class: 'hidden link-update', local: false, id: "edit-question" do |f|
-    p
-      = f.label :body, 'Your title'
-      = f.text_field :title
-    p
-      = f.label :body, 'Your question'
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true, direct_upload: true
-
-    h3 Links:
-    #cards
-      = f.fields_for :links do |link|
-        .field
-          = render 'shared/link_fields', f: link
+    - if question.links
       .links
-        = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+        p Links:
+        ul
+          = render partial: 'link', collection: question.links, question: question
 
-    p = f.submit 'Save'
+  - if can?(:edit, question)
+    p = link_to 'Edit question', '#', class: 'edit-question-link'
+    div class = "question-errors"
+      = render 'shared/errors', resource: question
+    = form_with model: question, class: 'hidden link-update', local: false, id: "edit-question" do |f|
+      p
+        = f.label :body, 'Your title'
+        = f.text_field :title
+      p
+        = f.label :body, 'Your question'
+        = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true, direct_upload: true
 
-  p = link_to 'Delete question', question_path(question), method: :delete
-  - if question.reward
-    p
-      = 'Reward:'
-      = question.reward.title
+      h3 Links:
+      #cards
+        = f.fields_for :links do |link|
+          .field
+            = render 'shared/link_fields', f: link
+        .links
+          = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
 
-.votes
-  .votes-errors
-  = link_to 'Negative', vote_negative_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
-  .value = question.vote_value
-  = link_to 'Positive', vote_positive_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
-  = link_to 'Cancel_voice', cancel_voice_question_path(question), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
+      p = f.submit 'Save'
 
-.subscription
-  = render 'subscriptions/subscription', question: question
+    p = link_to 'Delete question', question_path(question), method: :delete
+    - if question.reward
+      p
+        = 'Reward:'
+        = question.reward.title
 
-div class="comment_question_#{question.id}"
-  .comments
-    = render question.comments
-  p = link_to 'Add a comment', '#', class: 'add-comment'
-  p = render 'comments/form', resource: question
+  .votes
+    .votes-errors
+    = link_to 'Negative', vote_negative_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
+    .value = question.vote_value
+    = link_to 'Positive', vote_positive_question_path(question), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
+    = link_to 'Cancel_voice', cancel_voice_question_path(question), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
 
-p = 'Answer the question:'
-.answer-errors
-  = render 'shared/errors', resource: @answer
-= render 'answers/form', question: question
-.answers
-  .best_answer
-    - if question.best_answer
-      p = 'Best answer:'
-      = render @best_answer
-  .other_answer
-    p = 'Answers:'
-    = render @other_answers
+  .subscription
+    = render 'subscriptions/subscription', question: question
+
+  div class="comment_question_#{question.id}"
+    .comments
+      = render question.comments
+    p = link_to 'Add a comment', '#', class: 'add-comment'
+    p = render 'comments/form', resource: question
+
+  p = 'Answer the question:'
+  .answer-errors
+    = render 'shared/errors', resource: @answer
+  = render 'answers/form', question: question
+  .answers
+    .best_answer
+      - if question.best_answer
+        = render @best_answer
+    .other_answer
+      = render @other_answers
