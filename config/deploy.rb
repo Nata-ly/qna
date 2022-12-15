@@ -10,6 +10,7 @@ set :branch, 'main'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/qna"
 set :deploy_user, 'deploy'
+set :pty, false
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", 'config/master.key', 'config/master.key'

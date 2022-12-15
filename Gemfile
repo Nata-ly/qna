@@ -33,7 +33,7 @@ gem 'cancancan', '>= 3.4'
 gem 'doorkeeper'
 gem 'active_model_serializers', '~> 0.10'
 gem 'oj'
-gem 'sidekiq'
+gem 'sidekiq', '~> 6'
 gem 'sinatra', require: false
 
 gem 'mysql2', '~> 0.5.4'
@@ -73,6 +73,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
+  gem 'capistrano-sidekiq'
 end
 
 group :test do
