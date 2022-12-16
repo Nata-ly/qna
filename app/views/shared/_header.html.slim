@@ -4,5 +4,7 @@
       .title = link_to "MySite", root_path
     .col-6.row-center
       p = render 'search/form'
-    .col-3.offset-1.row-center
+    .col-2.row-center
+      p = link_to 'Rewards', rewards_path
+    .col-2.row-center
       p = authenticated_message(current_user)
