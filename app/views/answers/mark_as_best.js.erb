@@ -2,4 +2,4 @@ $('.other_answer #answer-' + <%= @answer.id %>).remove();
 <% if @last_best_answers %>
   $('.other_answer').append('<%= j render @last_best_answers %>');
 <% end %>
-$('.best_answer').html("<p>Best answer:</p><%= j render @answer %>");
+$('.best_answer').html("<div class='best_answer-zvezda'></div><%= j render @answer %>");
