@@ -92,6 +92,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.action_cable.allowed_request_origins = ["http://5.159.103.28"]
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
