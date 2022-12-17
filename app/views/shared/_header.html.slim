@@ -1,10 +1,10 @@
 .header
   .row
     .col-2.row-center
-      .title = link_to "MySite", root_path
+      .title = link_to "MySite", root_path, method: :get
     .col-6.row-center
       p = render 'search/form'
     .col-2.row-center
-      p = link_to 'Rewards', rewards_path
+      p = link_to 'Rewards', rewards_path, method: :get
     .col-2.row-center
       p = authenticated_message(current_user)
