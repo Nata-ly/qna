@@ -42,7 +42,7 @@
     - if question.reward
       p
         = 'Reward:'
-        = question.reward.title
+        = link_to question.reward.title, url_for(question.reward.image)
 
   .votes
     .votes-errors
