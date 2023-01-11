@@ -1,61 +1,62 @@
-- if answer.persisted?
-  div.answer id = "answer-#{answer.id}"
-    h4 = answer.body
+- cache answer do
+  - if answer.persisted?
+    div.answer id = "answer-#{answer.id}"
+      h4 = answer.body
 
-    - if answer.files.attached?
-      - answer.files.each do |file|
-        div id = "answer-file-#{file.id}"
-          p = link_to file.filename.to_s, url_for(file)
-          - if can?(:destroy_file, answer)
-            p = link_to 'Delete file', destroy_file_answer_path(answer, file_id: file.id), method: :delete, remote: true
-    - unless answer.links.count.zero?
-      .links
-        p Links:
-        ul
-          - answer.links.each do |link|
-            li id = "answer-link-#{link.id}"
-              = link_to link.name, link.url
-              - if link.gist?
-                .link-gist data-gist-id = "#{gist_id(link.url)}"
-                  = javascript_include_tag link.url+".js"
-              - if can?(:destroy_link, answer)
-                p = link_to 'Delete link', destroy_link_answer_path(answer, link: link), method: :delete, remote: true
+      - if answer.files.attached?
+        - answer.files.each do |file|
+          div id = "answer-file-#{file.id}"
+            p = link_to file.filename.to_s, url_for(file)
+            - if can?(:destroy_file, answer)
+              p = link_to 'Delete file', destroy_file_answer_path(answer, file_id: file.id), method: :delete, remote: true
+      - unless answer.links.count.zero?
+        .links
+          p Links:
+          ul
+            - answer.links.each do |link|
+              li id = "answer-link-#{link.id}"
+                = link_to link.name, link.url
+                - if link.gist?
+                  .link-gist data-gist-id = "#{gist_id(link.url)}"
+                    = javascript_include_tag link.url+".js"
+                - if can?(:destroy_link, answer)
+                  p = link_to 'Delete link', destroy_link_answer_path(answer, link: link), method: :delete, remote: true
 
-    - if can?(:edit, answer)
-      p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
-      div class = "answer-errors-#{answer.id}"
-        = render 'shared/errors', resource: answer
-      = form_with model: answer, local: false, class: 'hidden link-update', id: "edit-answer-#{answer.id}" do |f|
-        = f.label :body, 'Your answer'
-        = f.text_area :body
-        p
-          = f.label :files
-          = f.file_field :files, multiple: true, direct_upload: true
+      - if can?(:edit, answer)
+        p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+        div class = "answer-errors-#{answer.id}"
+          = render 'shared/errors', resource: answer
+        = form_with model: answer, local: false, class: 'hidden link-update', id: "edit-answer-#{answer.id}" do |f|
+          = f.label :body, 'Your answer'
+          = f.text_area :body
+          p
+            = f.label :files
+            = f.file_field :files, multiple: true, direct_upload: true
 
-        h3 = 'Links:'
-        #cards
-          = f.fields_for :links do |link|
-            .field
-              = render 'shared/link_fields', f: link
-          .links
-            .btn.btn-primary = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+          h3 = 'Links:'
+          #cards
+            = f.fields_for :links do |link|
+              .field
+                = render 'shared/link_fields', f: link
+            .links
+              .btn.btn-primary = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
 
-        = f.submit 'Save', class: 'btn btn-primary'
+          = f.submit 'Save', class: 'btn btn-primary'
 
-      p.btn.btn-primary = link_to 'Delete answer', answer, method: :delete, remote: true
+        p.btn.btn-primary = link_to 'Delete answer', answer, method: :delete, remote: true
 
-    - if can?(:mark_as_best, answer)
-      p = link_to 'Mark as best', mark_as_best_answer_path(answer), class: 'best_answer_link', method: :post, remote: true
+      - if can?(:mark_as_best, answer)
+        p = link_to 'Mark as best', mark_as_best_answer_path(answer), class: 'best_answer_link', method: :post, remote: true
 
-    .votes
-      .votes-errors
-      = link_to 'Negative', vote_negative_answer_path(answer), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
-      .value = answer.vote_value
-      = link_to 'Positive', vote_positive_answer_path(answer), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
-      = link_to 'Cancel_voice', cancel_voice_answer_path(answer), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
+      .votes
+        .votes-errors
+        = link_to 'Negative', vote_negative_answer_path(answer), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
+        .value = answer.vote_value
+        = link_to 'Positive', vote_positive_answer_path(answer), method: :patch, data: { type: :json }, remote: true, class: 'edit-votes-link'
+        = link_to 'Cancel_voice', cancel_voice_answer_path(answer), method: :delete, data: { type: :json }, remote: true, class: 'edit-votes-link'
 
-    div class="comment_answer_#{answer.id}"
-      .comments
-        = render answer.comments
-      p = link_to 'Add a comment', '#', class: 'add-comment'
-      p = render 'comments/form', resource: answer
+      div class="comment_answer_#{answer.id}"
+        .comments
+          = render answer.comments
+        p = link_to 'Add a comment', '#', class: 'add-comment'
+        p = render 'comments/form', resource: answer
